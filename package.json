@@ -1,0 +1,12 @@
+{
+  "name": "standup-slacker",
+  "version": "1.0.0",
+  "description": "Slack standup notes each day because I am a slacker",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Devin Weaver (@sukima)",
+  "license": "UNLICENSED"
+}
