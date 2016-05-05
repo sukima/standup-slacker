@@ -8,6 +8,9 @@ This utility relys on your own scheduling system (like cron). It simply reads
 in a file and sends it to slack then erases the file contents for the next run.
 If there is nothing in the file then it is a no-op.
 
+Slack API tokens can be created for your user here:
+https://api.slack.com/docs/oauth-test-tokens
+
 ## Example
 
 #### Launch script
