@@ -19,6 +19,6 @@ if (!postChannel) {
   dieWithError('Missing SLACK_CHANNEL in environment.');
 }
 
-new Slacker({token: oauthToken, file: contentFile, channel: POST_CHANNEL})
+new Slacker({token: oauthToken, file: contentFile, channel: postChannel})
   .postStandup()
   .catch(dieWithError);
