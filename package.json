@@ -7,6 +7,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "slacker": "bin/slacker.js"
+  },
   "author": "Devin Weaver (@sukima)",
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bluebird": "^3.3.5",
+    "request-promise": "^3.0.0"
+  }
 }
