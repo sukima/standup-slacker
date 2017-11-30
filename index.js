@@ -40,6 +40,7 @@ function postToSlack(payload) {
 function Slacker(options) {
   options = options || {};
   this.contentFile = options.file || throwMissingOption('file');
+  this.backupFile = options.backup || throwMissingOption('backup');
   this.oauthToken = options.token || throwMissingOption('token');
   this.channel = options.channel || '#general';
 }
@@ -63,6 +64,10 @@ Slacker.prototype.constructPayload = function (message) {
   };
 };
 
+Slacker.prototype.backupContentFile = function () {
+  return fs.copyFileAsync(this.contentFile, this.backupFile);
+};
+
 Slacker.prototype.cleanContentFile = function () {
   return fs.writeFileAsync(this.contentFile, '');
 };
@@ -75,6 +80,7 @@ Slacker.prototype.postStandup = function () {
     .then(postToSlack)
     .then(JSON.parse)
     .then(checkSlackResponse)
+    .then(this.backupContentFile.bind(this))
     .then(this.cleanContentFile.bind(this))
     .catch(NothingToDoError, function(err) {
       console.log(err.message);
