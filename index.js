@@ -65,7 +65,18 @@ Slacker.prototype.constructPayload = function (message) {
 };
 
 Slacker.prototype.backupContentFile = function () {
-  return fs.copyFileAsync(this.contentFile, this.backupFile);
+  let readFD = fs.createReadStream(this.contentFile);
+  let writeFD = fs.createWriteStream(this.backupFile);
+  return new Promise((resolve, reject) => {
+    readFD.on('error', reject);
+    writeFD.on('error', reject);
+    writeFD.on('finish', resolve);
+    readFD.pipe(writeFD);
+  }).catch(error => {
+    readFD.destroy();
+    writeFD.end();
+    throw error;
+  });
 };
 
 Slacker.prototype.cleanContentFile = function () {
